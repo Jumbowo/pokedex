@@ -1,31 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import PokemonSearchDropdown from "./PokemonSearchDropdown";
 import Fuse from "fuse.js";
-
 import * as nameData from "./assets/pokemonNames.json";
 
 const names = nameData.names;
 const fuseOptions = { };
 const fuse = new Fuse(names, fuseOptions);
 
-export default function PokemonSearch() {
-  const [input, setInput] = useState("");
-  const [results, setResults] = useState(null);
+export default function PokemonSearch({ updateSearch }) {
+  const [results, setResults] = useState([""]);
 
-  useEffect(() => {
-    setResults(fuse.search(input));
-  }, [input]);
+  function updateResults(input: string) {
+    setResults(fuse.search(input).slice(0, 5).map((x) => x.item));
+  }
 
-  console.log(results);
+  function submitSearch() {
+    console.log("Submitting form!");
+    updateSearch(results[0].toLowerCase());
+    setResults([""]);
+  }
 
   return (
-    <div className="flex flex-col gap-2 items-center">
+    <section className="flex flex-col gap-2 items-center relative">
       <label className="font-bold text-2xl" htmlFor="searchForm">Search Pokemon:</label>
       <input
-        className="border bg-slate-800 max-w-96 w-80 p-2"
+        className="
+          border border-slate-600 bg-slate-900 max-w-96 w-80 p-2
+          focus:outline-0 focus:border-white z-10
+        "
         id="searchForm"
         type="text"
-        onInput={(event) => setInput((event.target as HTMLInputElement).value)}
+        onInput={(event) => updateResults((event.target as HTMLInputElement).value)}
+        onKeyUp={(event) => {
+          if (event.code === "Enter") {
+            (event.target as HTMLInputElement).value = "";
+            submitSearch();
+          }
+        }}
       />
-    </div>
+      <input className="" type="submit" />
+      <PokemonSearchDropdown results={results} />
+    </section>
   );
 }

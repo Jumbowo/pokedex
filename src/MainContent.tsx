@@ -1,11 +1,14 @@
+import { useState } from "react";
 import PokemonInfo from "./PokemonInfo";
 import PokemonSearch from "./PokemonSearch";
 
 export default function MainContent() {
+  const [name, setName] = useState("pikachu");
+
   return (
-    <div className="flex flex-col gap-5 max-w-5xl p-4 text-center">
-      <PokemonSearch />
-      <PokemonInfo name="pikachu" />
-    </div>
+    <main className="flex flex-col gap-5 max-w-5xl p-4 text-center">
+      <PokemonSearch updateSearch={setName}/>
+      <PokemonInfo name={name} />
+    </main>
   );
 }
