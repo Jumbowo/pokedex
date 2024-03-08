@@ -6,7 +6,7 @@ export default function PokemonSearchDropdown({ results, submit }: {
     <ol
       className="
         max-w-96 w-80 absolute top-20
-        text-left 
+        text-left
         flex flex-col gap-0
       "
     >
