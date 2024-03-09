@@ -19,18 +19,18 @@ interface FlavorText {
 }
 
 const defaultPokemon: Pokemon = {
-  name: "Pikachu",
-  id: 25,
-  sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-  flavor: "When several of these Pokemon gather, their electricity could build and cause lightning storms.",
-  types: ["electric"],
+  name: "",
+  id: -1,
+  sprite: "",
+  flavor: "",
+  types: [],
 }
 
 export default function PokemonInfo({ name }: { name: string }) {
   const [pokemon, setPokemon] = useState<Pokemon>(defaultPokemon);
 
   useEffect(() => {
-    (async function getPokemonInfo() {
+    async function getPokemonInfo() {
       const pokemonRes = await fetch(pokemonUrl + name.replace(/[ .]+/gm, "-").replace(/[']+/gm, ""));
       const pokemonData = await pokemonRes.json();
 
@@ -49,29 +49,33 @@ export default function PokemonInfo({ name }: { name: string }) {
       };
 
       setPokemon(newPokemon);
-    })();
+    }
+
+    if (name !== "") getPokemonInfo();
   }, [name])  
 
-  return (
-    <section
-      className="
-        p-4 text-left max-w-3xl flex flex-col
-        border border-slate-600 bg-slate-900
-        animate-[slideIn_0.5s_ease-in-out_1]
-      "
-      key={pokemon.name}
-    >
-      <div className="flex flex-row justify-between text-2xl">
-        <div className="flex flex-row">
-          <h1 className="pr-3">{pokemon.name}</h1>
-          <PokemonTypes types={pokemon.types} />
+  if (pokemon.name !== "") {
+    return (
+      <section
+        className="
+          p-4 text-left max-w-3xl flex flex-col
+          border border-slate-600 bg-slate-900
+          animate-[slideIn_0.5s_ease-in-out_1]
+        "
+        key={pokemon.name}
+      >
+        <div className="flex flex-row justify-between text-2xl">
+          <div className="flex flex-row">
+            <h1 className="pr-3">{pokemon.name}</h1>
+            <PokemonTypes types={pokemon.types} />
+          </div>
+          <h2>{"#" + pokemon.id}</h2>
         </div>
-        <h2>{"#" + pokemon.id}</h2>
-      </div>
-      <div className="flex flex-row justify-between pt-2">
-        <div className="pt-4">{pokemon.flavor}</div>
-        <img className="max-w-[40%]" src={pokemon.sprite} alt={pokemon.name} title={pokemon.name}/>
-      </div>
-    </section>
-  );
+        <div className="flex flex-row justify-between pt-2">
+          <div className="pt-4">{pokemon.flavor}</div>
+          <img className="max-w-[40%]" src={pokemon.sprite} alt={pokemon.name} title={pokemon.name}/>
+        </div>
+      </section>
+    );
+  } else return <></>;
 }

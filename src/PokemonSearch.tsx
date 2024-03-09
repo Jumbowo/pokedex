@@ -5,9 +5,11 @@ import * as nameData from "./assets/pokemonNames.json";
 import submitButton from "./assets/submitButton.svg";
 
 const names = nameData.names;
-const fuseOptions = { };
+const fuseOptions = { useExtendedSearch: true };
 const fuse = new Fuse(names, fuseOptions);
 
+const searchBoxTabIndex = 1;
+  
 export default function PokemonSearch({ updateSearch }: { updateSearch: React.Dispatch<string>}) {
   const [results, setResults] = useState([""]);
 
@@ -33,12 +35,13 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
           type="image"
           src={submitButton}
           onClick={() => submitSearch()}
+          tabIndex={-1}
         />
       </label>
       <input
         className="
           border border-slate-600 bg-slate-900 max-w-96 w-80 p-2
-          focus:outline-0 focus:border-white z-10
+          focus:outline-0 focus:border-slate-400 z-10
         "
         id="searchForm"
         ref={searchFormRef}
@@ -47,8 +50,10 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
         onKeyUp={(event) => {
           if (event.code === "Enter") submitSearch();
         }}
+        tabIndex={searchBoxTabIndex}
+        autoFocus
       />
-      <PokemonSearchDropdown results={results} submit={submitSearch} />
+      <PokemonSearchDropdown results={results} submit={submitSearch} searchBoxTabIndex={searchBoxTabIndex} />
     </section>
   );
 }
