@@ -3,13 +3,7 @@ export default function PokemonSearchDropdown({ results, submit }: {
   submit: (dropdownNum: number) => void
 }) {
   return (
-    <ol
-      className="
-        max-w-96 w-80 absolute top-20
-        text-left
-        flex flex-col gap-0
-      "
-    >
+    <ol className="max-w-96 w-80 absolute top-20 text-left flex flex-col gap-0">
       {results[0] !== ""
         ? results.map((name, index) => {
           return ( 

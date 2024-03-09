@@ -14,7 +14,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
   const searchFormRef = useRef(null);
 
   function updateResults(input: string) {
-    setResults(fuse.search(input).slice(0, 5).map((x) => x.item));
+    setResults(fuse.search(input).slice(0, 8).map((x) => x.item));
   }
 
   function submitSearch(dropdownNum: number = 0) {
