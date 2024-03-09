@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PokemonTypes from "./PokemonTypes";
 
 const pokemonUrl = "https://pokeapi.co/api/v2/pokemon/";
 const speciesUrl = "https://pokeapi.co/api/v2/pokemon-species/";
@@ -8,6 +9,7 @@ interface Pokemon {
   id: number,
   sprite: string,
   flavor: string,
+  types: string[],
 }
 
 interface FlavorText {
@@ -21,6 +23,7 @@ const defaultPokemon: Pokemon = {
   id: 25,
   sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
   flavor: "When several of these Pokemon gather, their electricity could build and cause lightning storms.",
+  types: ["electric"],
 }
 
 export default function PokemonInfo({ name }: { name: string }) {
@@ -42,6 +45,7 @@ export default function PokemonInfo({ name }: { name: string }) {
           .toReversed()
           .find((entry: FlavorText) => entry.language.name === "en")
           .flavor_text,
+        types: pokemonData.types.map((entry: { slot: number, type: { name: string, url: string } }) => entry.type.name),
       };
 
       setPokemon(newPokemon);
@@ -51,17 +55,17 @@ export default function PokemonInfo({ name }: { name: string }) {
   return (
     <section
       className="
-        p-4 text-left max-w-3xl
-        flex flex-col
+        p-4 text-left max-w-3xl flex flex-col
         border border-slate-600 bg-slate-900
         animate-[slideIn_0.5s_ease-in-out_1]
       "
       key={pokemon.name}
     >
       <div className="flex flex-row justify-between text-2xl">
-        <h1>
-          {pokemon.name}
-        </h1>
+        <div className="flex flex-row">
+          <h1 className="pr-3">{pokemon.name}</h1>
+          <PokemonTypes types={pokemon.types} />
+        </div>
         <h2>{"#" + pokemon.id}</h2>
       </div>
       <div className="flex flex-row justify-between pt-2">
