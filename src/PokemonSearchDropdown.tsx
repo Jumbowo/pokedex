@@ -4,7 +4,7 @@ export default function PokemonSearchDropdown({ results, submit, searchBoxTabInd
   searchBoxTabIndex: number,
 }) {
   return (
-    <ol className="max-w-96 w-80 absolute top-20 text-left z-10 flex flex-col gap-0">
+    <ol className="max-w-96 w-80 absolute top-20 text-left z-20 flex flex-col gap-0">
       {results[0] !== ""
         ? results.map((name, index) => {
           return ( 
