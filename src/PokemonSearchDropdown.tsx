@@ -4,12 +4,17 @@ export default function PokemonSearchDropdown({ results, submit, searchBoxTabInd
   searchBoxTabIndex: number,
 }) {
   return (
-    <ol className="max-w-96 w-80 absolute top-20 text-left flex flex-col gap-0 z-10">
+    <ol className="max-w-96 w-80 absolute top-20 text-left z-10 flex flex-col gap-0">
       {results[0] !== ""
         ? results.map((name, index) => {
           return ( 
             <li
-              className="bg-slate-800 border border-b-0 last:border-b border-slate-600 hover:bg-slate-700 p-2"
+              className="
+                p-2 bg-slate-800 hover:bg-slate-700 
+                border border-t-0 border-slate-600
+                first:border-t first:-mt-px 
+                focus:outline-0 focus:border-slate-400 focus:border-t focus:-mt-px
+              "
               key={name}
               value={index}
               onClick={() => submit(index)}

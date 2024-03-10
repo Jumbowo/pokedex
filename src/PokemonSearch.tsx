@@ -21,6 +21,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
 
   function submitSearch(dropdownNum: number = 0) {
     (searchFormRef.current as HTMLInputElement | null)!.value = "";
+    (searchFormRef.current as HTMLInputElement | null)!.placeholder = results[dropdownNum];
     updateSearch(results[dropdownNum].toLowerCase());
     setResults([""]);
   }

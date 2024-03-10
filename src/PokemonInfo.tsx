@@ -28,14 +28,15 @@ const defaultPokemon: Pokemon = {
 
 export default function PokemonInfo({ name }: { name: string }) {
   const [pokemon, setPokemon] = useState<Pokemon>(defaultPokemon);
+  const [selectedVariety, setSelectedVariety] = useState(0);
 
   useEffect(() => {
-    async function getPokemonInfo() {
-      const pokemonRes = await fetch(pokemonUrl + name.replace(/[ .]+/gm, "-").replace(/[']+/gm, ""));
-      const pokemonData = await pokemonRes.json();
-
-      const speciesRes = await fetch(speciesUrl + pokemonData.species.name);
+    async function getVarietyInfo() {
+      const speciesRes = await fetch(speciesUrl + name.replace(/[ .]+/gm, "-").replace(/[']+/gm, ""));
       const speciesData = await speciesRes.json();
+
+      const pokemonRes = await fetch(speciesData.varieties[selectedVariety].pokemon.url);
+      const pokemonData = await pokemonRes.json();
 
       const newPokemon = {
         name: pokemonData.name.slice(0, 1).toUpperCase() + pokemonData.name.slice(1),
@@ -45,14 +46,17 @@ export default function PokemonInfo({ name }: { name: string }) {
           .toReversed()
           .find((entry: FlavorText) => entry.language.name === "en")
           .flavor_text,
-        types: pokemonData.types.map((entry: { slot: number, type: { name: string, url: string } }) => entry.type.name),
+        types: pokemonData.types
+          .map((entry: { slot: number, type: { name: string, url: string } }) => entry.type.name),
+        varieties: speciesData.varieties
+          .map((entry: { is_default: boolean, pokemon: { name: string, url: string } }) => entry.pokemon.name),
       };
 
       setPokemon(newPokemon);
     }
 
-    if (name !== "") getPokemonInfo();
-  }, [name])  
+    if (name !== "") getVarietyInfo();
+  }, [name, selectedVariety])  
 
   if (pokemon.name !== "") {
     return (
