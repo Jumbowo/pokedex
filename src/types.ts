@@ -11,6 +11,7 @@ export interface Pokemon {
   weightKG: number,
   heightM: number,
   abilities: string[],
+  stats: { name: string, baseValue: number }[],
 }
 
 export interface RawFlavorText {
@@ -28,4 +29,10 @@ export interface RawAbility {
   ability: { name: string, url: string },
   is_hidden: boolean,
   slot: number,
+}
+
+export interface RawStat {
+  base_stat: number,
+  effort: number,
+  stat: { name: string, url: string },
 }

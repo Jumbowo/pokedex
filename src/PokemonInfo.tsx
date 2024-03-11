@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import PokemonVarieties from "./PokemonVarieties.tsx";
 import PokemonInfoBox from "./PokemonInfoBox.tsx";
 
-import { Pokemon, RawVariety, RawFlavorText, RawAbility } from "./types.ts";
+import { Pokemon, RawVariety, RawFlavorText, RawAbility, RawStat } from "./types.ts";
 
 import * as pokemonIdsObject from "./assets/pokemonNameId.json";
+import prettifyName from "./prettifyName.ts";
+
 const pokemonIds = pokemonIdsObject.pokemon;
 
 const NUM_OF_POKEMON = 1025;
@@ -23,6 +25,7 @@ const defaultPokemon: Pokemon = {
   weightKG: 0,
   heightM: 0,
   abilities: [],
+  stats: [],
 }
 
 export default function PokemonInfo({ name, updateSearch }: { name: string, updateSearch: (name: string) => void }) {
@@ -56,7 +59,7 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
       if (currentIsSelected) setSelectedVariety(speciesData.varieties[0].pokemon.name);
 
       const newPokemon = {
-        name: pokemonData.name.slice(0, 1).toUpperCase() + pokemonData.name.slice(1),
+        name: prettifyName(pokemonData.name),
         speciesName: pokemonIds[speciesData.id - 1].name,
         id: pokemonData.id,
         prevName: (speciesData.id - 1) > 0 ? pokemonIds[speciesData.id - 2].name : "",
@@ -75,7 +78,16 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
         abilities: pokemonData.abilities
           .filter((entry: RawAbility) => !entry.is_hidden)
           .map((entry: RawAbility) => entry.ability.name),
+        stats: pokemonData.stats
+          .map((entry: RawStat) => {
+            return { 
+              name: entry.stat.name.slice(0, 1).toUpperCase() + entry.stat.name.slice(1),
+              baseValue: entry.base_stat,
+            };
+          }),
       };
+
+      console.log()
 
       setPokemon(newPokemon);
     }
@@ -86,12 +98,12 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
   if (pokemon.name === "") return <></>;
   return (
     <div className="flex flex-col gap-5 pt-0">
-      {infoBoxMemo}
       <PokemonVarieties
         nonSelectedVarieties={pokemon.varieties.filter((v) => v !== selectedVariety)}
         submit={selectVariety}
         baseTabIndex={2}
       />
+      {infoBoxMemo}
     </div>
   );
 }

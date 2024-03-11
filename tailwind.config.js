@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        slideIn: {
-          "0%": { transform: "translate(0, 12rem)", opacity: "0%" },
-          "100%": { transform: "translate(0)", opacity: "100%" },
+        fadeIn: {
+          "0%": { opacity: "0%" },
+          "100%": { opacity: "100%" },
         },
       },
     },

@@ -1,5 +1,6 @@
 import PokemonDetails from "./PokemonDetails.tsx";
 import PokemonNextAndPrev from "./PokemonNextAndPrev.tsx";
+import PokemonStats from "./PokemonStats.tsx";
 import PokemonTypes from "./PokemonTypes";
 
 import { Pokemon } from "./types.ts";
@@ -12,7 +13,7 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
     <section
       className="
         flex flex-col relative
-        animate-[slideIn_0.5s_ease-in-out_1]
+        animate-[fadeIn_0.5s_ease-in-out_1]
       "
       key={pokemon.name}
     >
@@ -25,17 +26,20 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
       >
         <div className="flex flex-row justify-between text-2xl">
           <div className="flex flex-row">
-            <h1 className="pr-3">{pokemon.name}</h1>
+            <h1 className="pr-3">{pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}</h1>
             <PokemonTypes types={pokemon.types} />
           </div>
           <h2>{"#" + pokemon.id}</h2>
         </div>
-        <div className="flex flex-row justify-between pt-2">
+        <div className="flex flex-row justify-between pt-2 gap-4">
           <div className="flex flex-col gap-4">
             <div className="pt-4">{pokemon.flavor}</div>
             <PokemonDetails pokemon={pokemon} />
+            <PokemonStats pokemon={pokemon} />
           </div>
-          <img className="max-w-[40%]" src={pokemon.sprite} alt={pokemon.name} title={pokemon.name}/>
+          <div className="min-w-[40%]">
+            <img src={pokemon.sprite} alt={pokemon.name} title={pokemon.name} />
+          </div>
         </div>
       </section>
     </section>

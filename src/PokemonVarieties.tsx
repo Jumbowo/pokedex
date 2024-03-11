@@ -1,12 +1,15 @@
+import prettifyName from "./prettifyName";
+
 export default function PokemonVarieties({ nonSelectedVarieties, submit, baseTabIndex }: {
   nonSelectedVarieties: string[],
   submit: (varietyName: string) => void,
   baseTabIndex: number,
 }) {
+  // TODO: put this somewhere and make it look nice
   if (nonSelectedVarieties.length === 0) return <></>;
   return (
     <div className="flex flex-col">
-      <ol className="max-w-96 w-80 top-20 text-left z-10 flex flex-col gap-0 self-center">
+      <ol className="max-w-96 w-80 top-20 text-left flex flex-col gap-0 self-center">
         {nonSelectedVarieties[0] !== ""
           ? nonSelectedVarieties.map((name, index) => {
             return ( 
@@ -25,7 +28,7 @@ export default function PokemonVarieties({ nonSelectedVarieties, submit, baseTab
                 }}
                 tabIndex={baseTabIndex + index + 1}
               >
-                {name}
+                {prettifyName(name)}
               </li>
             )
           })
