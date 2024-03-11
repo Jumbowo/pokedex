@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import PokemonSearchDropdown from "./PokemonSearchDropdown";
 import Fuse from "fuse.js";
 import * as nameIdData from "./assets/pokemonNameId.json";
-import submitButton from "./assets/submitButton.svg";
+import arrowIcon from "./assets/arrowIcon.svg";
 
 const names = nameIdData.pokemon;
 const fuseOptions = { useExtendedSearch: true, keys: ["name"] };
@@ -34,7 +34,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
           className="absolute top-11 -right-14 z-20 w-8 invert-[40%]"
           id="searchSubmit"
           type="image"
-          src={submitButton}
+          src={arrowIcon}
           onClick={() => submitSearch()}
           tabIndex={-1}
         />

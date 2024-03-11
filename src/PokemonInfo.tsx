@@ -25,7 +25,7 @@ const defaultPokemon: Pokemon = {
   abilities: [],
 }
 
-export default function PokemonInfo({ name, updateSearch }: { name: string, updateSearch: React.Dispatch<string> }) {
+export default function PokemonInfo({ name, updateSearch }: { name: string, updateSearch: (name: string) => void }) {
   const [pokemon, setPokemon] = useState<Pokemon>(defaultPokemon);
   const [selectedVariety, setSelectedVariety] = useState("");
 
@@ -53,10 +53,7 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
       );
       const pokemonData = await pokemonRes.json();
 
-      if (currentIsSelected) {
-        setSelectedVariety(speciesData.varieties[0].pokemon.name);
-        return;
-      }
+      if (currentIsSelected) setSelectedVariety(speciesData.varieties[0].pokemon.name);
 
       const newPokemon = {
         name: pokemonData.name.slice(0, 1).toUpperCase() + pokemonData.name.slice(1),
@@ -88,13 +85,13 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
 
   if (pokemon.name === "") return <></>;
   return (
-    <div className="flex flex-col gap-5 pt-0 p-4">
+    <div className="flex flex-col gap-5 pt-0">
+      {infoBoxMemo}
       <PokemonVarieties
         nonSelectedVarieties={pokemon.varieties.filter((v) => v !== selectedVariety)}
         submit={selectVariety}
         baseTabIndex={2}
       />
-      {infoBoxMemo}
     </div>
   );
 }

@@ -1,33 +1,22 @@
 import PokemonDetails from "./PokemonDetails.tsx";
+import PokemonNextAndPrev from "./PokemonNextAndPrev.tsx";
 import PokemonTypes from "./PokemonTypes";
 
 import { Pokemon } from "./types.ts";
 
 export default function PokemonInfoBox({ pokemon, updateSearch }: {
   pokemon: Pokemon,
-  updateSearch: React.Dispatch<string>,
+  updateSearch: (name: string) => void,
 }) {
   return (
     <section
       className="
-        flex flex-row gap-4 relative
+        flex flex-col relative
         animate-[slideIn_0.5s_ease-in-out_1]
       "
       key={pokemon.name}
     >
-      {pokemon.prevName !== ""
-        ? <button
-            className="
-              p-2 bg-slate-900 border border-slate-600
-              w-24 h-full absolute -left-28 text-center overflow-visible
-              hover:bg-slate-800 hover:border-slate-400
-            "
-            onClick={() => updateSearch(pokemon.prevName.toLowerCase())}
-          >
-            {pokemon.prevName}
-          </button>
-        : <></>
-      }
+      <PokemonNextAndPrev pokemon={pokemon} updateSearch={updateSearch} />
       <section
         className="
           p-4 text-left max-w-3xl flex flex-col
@@ -49,19 +38,6 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
           <img className="max-w-[40%]" src={pokemon.sprite} alt={pokemon.name} title={pokemon.name}/>
         </div>
       </section>
-      {pokemon.nextName !== ""
-        ? <button
-            className="
-              p-2 bg-slate-900 border border-slate-600
-              w-24 h-full absolute -right-28 text-center overflow-visible
-              hover:bg-slate-800 hover:border-slate-400
-            "
-            onClick={() => updateSearch(pokemon.nextName.toLowerCase())}
-          >
-            {pokemon.nextName}
-          </button>
-        : <></>
-      }
     </section>
   );
 }
