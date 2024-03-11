@@ -2,21 +2,30 @@ import { useEffect, useMemo, useState } from "react";
 import PokemonVarieties from "./PokemonVarieties.tsx";
 import PokemonInfoBox from "./PokemonInfoBox.tsx";
 
-import { Pokemon, RawVariety, RawFlavorText } from "./types.ts";
+import { Pokemon, RawVariety, RawFlavorText, RawAbility } from "./types.ts";
 
+import * as pokemonIdsObject from "./assets/pokemonNameId.json";
+const pokemonIds = pokemonIdsObject.pokemon;
+
+const NUM_OF_POKEMON = 1025;
 const speciesUrl = "https://pokeapi.co/api/v2/pokemon-species/";
 
 const defaultPokemon: Pokemon = {
   name: "",
   speciesName: "",
   id: -1,
+  prevName: "",
+  nextName: "",
   sprite: "",
   flavor: "",
   types: [],
   varieties: [],
+  weightKG: 0,
+  heightM: 0,
+  abilities: [],
 }
 
-export default function PokemonInfo({ name }: { name: string }) {
+export default function PokemonInfo({ name, updateSearch }: { name: string, updateSearch: React.Dispatch<string> }) {
   const [pokemon, setPokemon] = useState<Pokemon>(defaultPokemon);
   const [selectedVariety, setSelectedVariety] = useState("");
 
@@ -25,7 +34,9 @@ export default function PokemonInfo({ name }: { name: string }) {
     match !== undefined ? setSelectedVariety(match) : console.log("Error");
   }
 
-  const infoBoxMemo = useMemo(() => <PokemonInfoBox pokemon={pokemon} />, [pokemon]);
+  const infoBoxMemo = useMemo(() => {
+    return <PokemonInfoBox pokemon={pokemon} updateSearch={(data) => updateSearch(data)} />
+  }, [pokemon, updateSearch]);
 
   useEffect(() => {
     async function getVarietyInfo() {
@@ -49,8 +60,10 @@ export default function PokemonInfo({ name }: { name: string }) {
 
       const newPokemon = {
         name: pokemonData.name.slice(0, 1).toUpperCase() + pokemonData.name.slice(1),
-        speciesName: name,
+        speciesName: pokemonIds[speciesData.id - 1].name,
         id: pokemonData.id,
+        prevName: (speciesData.id - 1) > 0 ? pokemonIds[speciesData.id - 2].name : "",
+        nextName: speciesData.id < NUM_OF_POKEMON - 1 ? pokemonIds[speciesData.id].name : "",
         sprite: pokemonData.sprites.other["official-artwork"].front_default,
         flavor: speciesData.flavor_text_entries
           .toReversed()
@@ -60,6 +73,11 @@ export default function PokemonInfo({ name }: { name: string }) {
           .map((entry: { slot: number, type: { name: string, url: string } }) => entry.type.name),
         varieties: speciesData.varieties
           .map((entry: RawVariety) => entry.pokemon.name),
+        weightKG: pokemonData.weight / 10,
+        heightM: pokemonData.height / 10,
+        abilities: pokemonData.abilities
+          .filter((entry: RawAbility) => !entry.is_hidden)
+          .map((entry: RawAbility) => entry.ability.name),
       };
 
       setPokemon(newPokemon);
@@ -68,16 +86,15 @@ export default function PokemonInfo({ name }: { name: string }) {
     if (name !== "") getVarietyInfo();
   }, [name, selectedVariety])  
 
-  if (pokemon.name !== "") {
-    return (
-      <div className="flex flex-col gap-5 pt-0 p-4">
-        <PokemonVarieties
-          nonSelectedVarieties={pokemon.varieties.filter((v) => v !== selectedVariety)}
-          submit={selectVariety}
-          baseTabIndex={2}
-        />
-        {infoBoxMemo}
-      </div>
-    );
-  } else return <></>;
+  if (pokemon.name === "") return <></>;
+  return (
+    <div className="flex flex-col gap-5 pt-0 p-4">
+      <PokemonVarieties
+        nonSelectedVarieties={pokemon.varieties.filter((v) => v !== selectedVariety)}
+        submit={selectVariety}
+        baseTabIndex={2}
+      />
+      {infoBoxMemo}
+    </div>
+  );
 }

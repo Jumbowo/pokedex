@@ -2,10 +2,15 @@ export interface Pokemon {
   name: string,
   speciesName: string,
   id: number,
+  prevName: string,
+  nextName: string,
   sprite: string,
   flavor: string,
   types: string[],
   varieties: string[],
+  weightKG: number,
+  heightM: number,
+  abilities: string[],
 }
 
 export interface RawFlavorText {
@@ -15,6 +20,12 @@ export interface RawFlavorText {
 }
 
 export interface RawVariety {
-  is_default: string,
+  is_default: boolean,
   pokemon: { name: string, url: string },
+}
+
+export interface RawAbility {
+  ability: { name: string, url: string },
+  is_hidden: boolean,
+  slot: number,
 }

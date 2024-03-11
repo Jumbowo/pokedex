@@ -7,8 +7,8 @@ export default function MainContent() {
 
   return (
     <main className="flex flex-col gap-5 max-w-6xl p-4 text-center">
-      <PokemonSearch updateSearch={setName} />
-      <PokemonInfo name={name} />
+      <PokemonSearch updateSearch={(data) => setName(data)} />
+      <PokemonInfo name={name} updateSearch={(data) => setName(data)} />
     </main>
   );
 }

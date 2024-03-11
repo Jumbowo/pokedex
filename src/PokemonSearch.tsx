@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import PokemonSearchDropdown from "./PokemonSearchDropdown";
 import Fuse from "fuse.js";
-import * as nameData from "./assets/pokemonNames.json";
+import * as nameIdData from "./assets/pokemonNameId.json";
 import submitButton from "./assets/submitButton.svg";
 
-const names = nameData.names;
-const fuseOptions = { useExtendedSearch: true };
+const names = nameIdData.pokemon;
+const fuseOptions = { useExtendedSearch: true, keys: ["name"] };
 const fuse = new Fuse(names, fuseOptions);
 
 const searchBoxTabIndex = 1;
@@ -16,7 +16,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
   const searchFormRef = useRef(null);
 
   function updateResults(input: string) {
-    setResults(fuse.search(input).slice(0, 8).map((x) => x.item));
+    setResults(fuse.search(input).slice(0, 8).map((x) => x.item.name));
   }
 
   function submitSearch(dropdownNum: number = 0) {

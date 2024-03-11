@@ -7,7 +7,7 @@ interface TypeInfo {
 
 export default function PokemonTypes({ types }: { types: string[] }) {
   const typeInfoList = new Array<TypeInfo>();
-  for (const t of types) typeInfoList.push({ name: t, icon: typeIcons[t] });
+  for (const t of types) typeInfoList.push({ name: t, icon: typeIcons[t as keyof typeof typeIcons] });
 
   return (
     <div className="flex flex-row gap-2 relative" >
