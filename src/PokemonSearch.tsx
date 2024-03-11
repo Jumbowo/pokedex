@@ -3,6 +3,7 @@ import PokemonSearchDropdown from "./PokemonSearchDropdown";
 import Fuse from "fuse.js";
 import * as nameIdData from "./assets/pokemonNameId.json";
 import arrowIcon from "./assets/arrowIcon.svg";
+import randomSearchIcon from "./assets/randomSearchIcon.svg";
 
 const names = nameIdData.pokemon;
 const fuseOptions = { useExtendedSearch: true, keys: ["name"] };
@@ -10,7 +11,7 @@ const fuse = new Fuse(names, fuseOptions);
 
 const searchBoxTabIndex = 1;
   
-export default function PokemonSearch({ updateSearch }: { updateSearch: React.Dispatch<string>}) {
+export default function PokemonSearch({ updateSearch }: { updateSearch: (name: string) => void }) {
   const [results, setResults] = useState([""]);
 
   const searchFormRef = useRef(null);
@@ -26,6 +27,12 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
     setResults([""]);
   }
 
+  function searchRandom() {
+    const random = names[Math.floor(Math.random() * 1024)].name.toLowerCase();
+    updateSearch(random);
+    setResults([""]);
+  }
+
   return (
     <section className="flex flex-col gap-2 items-center relative">
       <label className="font-bold text-2xl relative" htmlFor="searchForm">
@@ -37,6 +44,14 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: React.Di
           src={arrowIcon}
           onClick={() => submitSearch()}
           tabIndex={-1}
+        />
+        <input
+          className="absolute top-[39px] -right-28 z-20 w-10 invert-[40%]"
+          id="searchSubmit"
+          type="image"
+          src={randomSearchIcon}
+          onClick={() => searchRandom()}
+          tabIndex={searchBoxTabIndex + 1}
         />
       </label>
       <input

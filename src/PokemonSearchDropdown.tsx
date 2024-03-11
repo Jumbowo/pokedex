@@ -21,7 +21,7 @@ export default function PokemonSearchDropdown({ results, submit, searchBoxTabInd
               onKeyUp={(event) => {
                 if (event.code === "Enter") submit(index);
               }}
-              tabIndex={searchBoxTabIndex + index}
+              tabIndex={searchBoxTabIndex + index + 1}
             >
               {name}
             </li>
