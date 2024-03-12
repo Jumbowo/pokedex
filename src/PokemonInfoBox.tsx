@@ -1,4 +1,5 @@
 import PokemonDetails from "./PokemonDetails.tsx";
+import PokemonEvolutionChain from "./PokemonEvolutionChain.tsx";
 import PokemonNextAndPrev from "./PokemonNextAndPrev.tsx";
 import PokemonStats from "./PokemonStats.tsx";
 import PokemonTypes from "./PokemonTypes";
@@ -42,6 +43,7 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
           </div>
         </div>
       </section>
+      <PokemonEvolutionChain pokemon={pokemon} />
     </section>
   );
 }

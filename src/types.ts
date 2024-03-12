@@ -12,6 +12,7 @@ export interface Pokemon {
   heightM: number,
   abilities: string[],
   stats: { name: string, baseValue: number }[],
+  evolutionUrl: string,
 }
 
 export interface RawFlavorText {
