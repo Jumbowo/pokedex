@@ -1,15 +1,16 @@
 import PokemonDetails from "./PokemonDetails.tsx";
 import PokemonEvolutionChain from "./PokemonEvolutionChain.tsx";
-import PokemonNextAndPrev from "./PokemonNextAndPrev.tsx";
 import PokemonStats from "./PokemonStats.tsx";
 import PokemonTypes from "./PokemonTypes";
+import PokemonVarieties from "./PokemonVarieties.tsx";
 
 import { Pokemon } from "./types.ts";
 
-export default function PokemonInfoBox({ pokemon, updateSearch }: {
+export default function PokemonInfoBox({ pokemon, selectVariety }: {
   pokemon: Pokemon,
-  updateSearch: (name: string) => void,
+  selectVariety: (variety: string) => void,
 }) {
+
   return (
     <section
       className="
@@ -18,7 +19,11 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
       "
       key={pokemon.name}
     >
-      <PokemonNextAndPrev pokemon={pokemon} updateSearch={updateSearch} />
+      <PokemonVarieties
+        nonSelectedVarieties={pokemon.varieties}
+        submit={selectVariety}
+        baseTabIndex={4}
+      />
       <section
         className="
           p-4 text-left max-w-3xl flex flex-col
@@ -27,7 +32,10 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
       >
         <div className="flex flex-row justify-between text-2xl">
           <div className="flex flex-row">
-            <h1 className="pr-3">{pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}</h1>
+            {pokemon.name !== ""
+              ? <h1 className="pr-3">{pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}</h1>
+              : <h1 className="pr-3 w-32 rounded bg-slate-700 animate-pulse"></h1>
+            }
             <PokemonTypes types={pokemon.types} />
           </div>
           <h2>{"#" + pokemon.id}</h2>
@@ -38,7 +46,7 @@ export default function PokemonInfoBox({ pokemon, updateSearch }: {
             <PokemonDetails pokemon={pokemon} />
             <PokemonStats pokemon={pokemon} />
           </div>
-          <div className="min-w-[40%]">
+          <div className="min-w-[40%] w-[40%]">
             <img src={pokemon.sprite} alt={pokemon.name} title={pokemon.name} />
           </div>
         </div>
