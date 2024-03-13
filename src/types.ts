@@ -12,7 +12,27 @@ export interface Pokemon {
   heightM: number,
   abilities: string[],
   stats: { name: string, baseValue: number }[],
-  evolutionUrl: string,
+  evolutionChain: {
+    name: string,
+    evolvesTo: Array<{ name: string, evolvesTo: Array<{ name: string, evolvesTo: [] }> }>
+  } | null,
+}
+
+export const defaultPokemon: Pokemon = {
+  name: "",
+  speciesName: "",
+  id: -1,
+  prevName: "",
+  nextName: "",
+  sprite: "",
+  flavor: "",
+  types: [],
+  varieties: [],
+  weightKG: 0,
+  heightM: 0,
+  abilities: [],
+  stats: [],
+  evolutionChain: null,
 }
 
 export interface RawFlavorText {

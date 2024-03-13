@@ -15,6 +15,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
   const [results, setResults] = useState([""]);
 
   const searchFormRef = useRef(null);
+  const randomSearchRef = useRef(null);
 
   function updateResults(input: string) {
     setResults(fuse.search(input).slice(0, 8).map((x) => x.item.name));
@@ -28,6 +29,8 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
   }
 
   function searchRandom() {
+    (randomSearchRef.current as HTMLInputElement | null)!.disabled = true; 
+    setTimeout(() => (randomSearchRef.current as HTMLInputElement | null)!.disabled = false, 1000); 
     const random = names[Math.floor(Math.random() * 1024)].name.toLowerCase();
     updateSearch(random);
     setResults([""]);
@@ -38,7 +41,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
       <label className="font-bold text-2xl relative" htmlFor="searchForm">
         Search Pokemon:
         <input
-          className="absolute top-11 -right-14 z-20 w-8 invert-[40%]"
+          className="absolute top-11 -right-14 z-20 w-8 invert-[50%] hover:invert-[90%]"
           id="searchSubmit"
           type="image"
           src={arrowIcon}
@@ -46,11 +49,15 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
           tabIndex={-1}
         />
         <input
-          className="absolute top-[39px] -right-28 z-20 w-10 invert-[40%]"
+          className="
+            absolute top-[39px] -right-28 z-20 w-10 outline-0 invert-[50%]
+            focus:invert-[90%] hover:invert-[90%]
+          "
           id="searchSubmit"
+          ref={randomSearchRef}
           type="image"
           src={randomSearchIcon}
-          onClick={() => searchRandom()}
+          onClick={searchRandom}
           tabIndex={searchBoxTabIndex + 1}
         />
       </label>

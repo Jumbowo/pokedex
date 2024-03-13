@@ -15,6 +15,9 @@ export default async function getPokemonInfo(name: string, variety: string = "")
   const speciesRes = await fetch(speciesUrl + name);
   const speciesData = await speciesRes.json();
 
+  const evoRes = await fetch(speciesData.evolution_chain.url);
+  const evoData = await evoRes.json();
+
   const pokemonRes = await fetch(
     variety === ""
       ? speciesData.varieties[0].pokemon.url
@@ -52,7 +55,22 @@ export default async function getPokemonInfo(name: string, variety: string = "")
           baseValue: entry.base_stat,
         };
       }),
-    evolutionUrl: speciesData.evolution_chain.url,
+    evolutionChain: {
+      name: evoData.chain.species.name,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      evolvesTo: evoData.chain.evolves_to.map((entry: any) => {
+        return { 
+          name: entry.species.name,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          evolvesTo: entry.evolves_to.map((entry: any) => {
+            return {
+              name: entry.species.name,
+              evolvesTo: []
+            }
+          })
+        } 
+      }),
+    },
   };
 
   return newPokemon;
