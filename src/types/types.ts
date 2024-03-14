@@ -57,3 +57,15 @@ export interface RawStat {
   effort: number,
   stat: { name: string, url: string },
 }
+
+export interface RawAbilityEffect {
+  effect: string,
+  language: { name: string, url: string }, 
+  short_effect: string,
+}
+
+export interface RawAbilityFlavor {
+  flavor_text: string,
+  language: { name: string, url: string }, 
+  version_group: { name: string, url: string },
+}

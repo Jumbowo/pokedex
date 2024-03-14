@@ -4,7 +4,6 @@ import { Pokemon } from "./types/types.ts";
 import bigArrowIcon from "./assets/bigArrowIcon.svg";
 
 export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon }) {
-
   function getRenderNodes() {
     return pokemon.evolutionChain!.evolvesTo.map((entry) => {
       if (entry.evolvesTo.length !== 0) {
@@ -38,6 +37,7 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
       }
     })
   }
+
   if (pokemon.evolutionChain!.evolvesTo.length === 0) {
     return (
       <section
