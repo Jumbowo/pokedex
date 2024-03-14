@@ -15,7 +15,7 @@ export default function EvoCard({ name }: { name: string }) {
   }, [name])
   
   return (
-    <article className="flex flex-col text-center max-w-[20%]">
+    <article className="flex flex-col text-center max-w-[15%]">
       <img src={pokemon.sprite} />
       <span>{prettifyName(name)}</span>
     </article>

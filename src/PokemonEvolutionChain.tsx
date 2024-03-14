@@ -1,6 +1,7 @@
 import EvoCard from "./EvoCard";
 import prettifyName from "./prettifyName";
 import { Pokemon } from "./types";
+import bigArrowIcon from "./assets/bigArrowIcon.svg";
 
 export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon }) {
 
@@ -15,7 +16,9 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
                 key={pokemon.evolutionChain!.name + entry.name + entry2.name}
               >
                 <EvoCard name={pokemon.evolutionChain!.name} />
+                <img className="invert-[90%] w-10" src={bigArrowIcon} />
                 <EvoCard name={entry.name} />
+                <img className="invert-[90%] w-10" src={bigArrowIcon} />
                 <EvoCard name={entry2.name} />
               </div>
             );
@@ -28,6 +31,7 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
             key={pokemon.evolutionChain!.name + entry.name}
           >
             <EvoCard name={pokemon.evolutionChain!.name} />
+            <img className="invert-[90%] w-10" src={bigArrowIcon} />
             <EvoCard name={entry.name} />
           </div>
         );
