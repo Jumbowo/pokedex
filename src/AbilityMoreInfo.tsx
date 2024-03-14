@@ -1,12 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import moreInfoQuestionMark from "./assets/questionMark.svg";
 import { RawAbilityEffect, RawAbilityFlavor } from "./types/types";
+import { useExternalClickHandler } from "./hooks/useExternalClickHandler";
 
 const abilityUrl = "https://pokeapi.co/api/v2/ability/";
 
 export default function AbilityMoreInfo({ abilityName }: { abilityName: string }) {
   const [visible, setVisible] = useState(false);
   const [abilityInfo, setAbilityInfo] = useState({ effect: "" });
+
+  const abilityMoreInfoRef = useRef(null);
+  useExternalClickHandler(abilityMoreInfoRef, () => setVisible(false));
 
   const questionMarkIconMemo = useMemo(() => {
     return (
@@ -40,6 +44,7 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
 
   return (
     <div
+      ref={abilityMoreInfoRef}
       onMouseLeave={() => setVisible(false)}
     >
       {questionMarkIconMemo}
