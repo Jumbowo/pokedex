@@ -10,7 +10,10 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
         return (
           entry.evolvesTo.map((entry2) => {
             return (
-              <div className="flex flex-row gap-10" key={pokemon.evolutionChain!.name}>
+              <div 
+                className="flex flex-row justify-evenly gap-10" 
+                key={pokemon.evolutionChain!.name + entry.name + entry2.name}
+              >
                 <EvoCard name={pokemon.evolutionChain!.name} />
                 <EvoCard name={entry.name} />
                 <EvoCard name={entry2.name} />
@@ -20,7 +23,10 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
         );
       } else {
         return (
-          <div className="flex flex-row gap-10" key={pokemon.evolutionChain!.name}>
+          <div 
+            className="flex flex-row justify-evenly gap-10"
+            key={pokemon.evolutionChain!.name + entry.name}
+          >
             <EvoCard name={pokemon.evolutionChain!.name} />
             <EvoCard name={entry.name} />
           </div>

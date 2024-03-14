@@ -12,7 +12,7 @@ export default function PokemonNextAndPrev({ pokemon, updateSearch }: {
             className="
               p-1 bg-slate-900 border border-r-0 border-slate-600
               w-[50%] text-left flex flex-row gap-4
-              hover:bg-slate-800 outline-0 focus:border-slate-400 focus:border-r
+              hover:bg-slate-700 outline-0 focus:border-slate-400 focus:border-r
             "
             onClick={() => updateSearch(pokemon.prevName.toLowerCase())}
             tabIndex={3}
@@ -30,7 +30,7 @@ export default function PokemonNextAndPrev({ pokemon, updateSearch }: {
             className="
               p-1 bg-slate-900 border border-slate-600
               w-[50%] text-right flex flex-row gap-4 justify-end
-              hover:bg-slate-800 outline-0 focus:border-slate-400
+              hover:bg-slate-700 outline-0 focus:border-slate-400
             "
             onClick={() => updateSearch(pokemon.nextName.toLowerCase())}
             tabIndex={4}

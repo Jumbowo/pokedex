@@ -41,7 +41,6 @@ export default async function getPokemonInfo(name: string, variety: string = "")
     types: pokemonData.types
       .map((entry: { slot: number, type: { name: string, url: string } }) => entry.type.name),
     varieties: speciesData.varieties
-      .filter((entry: RawVariety) => entry.pokemon.name !== variety)
       .map((entry: RawVariety) => entry.pokemon.name),
     weightKG: pokemonData.weight / 10,
     heightM: pokemonData.height / 10,
