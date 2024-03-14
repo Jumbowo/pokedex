@@ -1,10 +1,16 @@
-export default function PokemonSearchDropdown({ results, submit, searchBoxTabIndex }: {
+import { RefObject } from "react";
+
+export default function PokemonSearchDropdown({ results, submit, searchBoxTabIndex, searchRef }: {
   results: string[],
   submit: (dropdownNum: number) => void,
   searchBoxTabIndex: number,
+  searchRef: RefObject<HTMLOListElement>,
 }) {
   return (
-    <ol className="max-w-96 w-80 absolute top-20 text-left z-20 flex flex-col gap-0">
+    <ol
+      className="max-w-96 w-80 absolute top-20 text-left z-20 flex flex-col gap-0"
+      ref={searchRef}
+    >
       {results[0] !== ""
         ? results.map((name, index) => {
           return ( 
