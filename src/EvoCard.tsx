@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import getPokemonInfo from "./getPokemonInfo";
-import prettifyName from "./prettifyName";
-import { defaultPokemon } from "./types";
+import getPokemonInfo from "./utils/getPokemonInfo";
+import prettifyName from "./utils/prettifyName";
+import { defaultPokemon } from "./types/types.ts";
 
 export default function EvoCard({ name }: { name: string }) {
   const [pokemon, setPokemon] = useState(defaultPokemon);

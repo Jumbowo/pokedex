@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import PokemonInfoBox from "./PokemonInfoBox.tsx";
-import { Pokemon, defaultPokemon } from "./types.ts";
-import getPokemonInfo from "./getPokemonInfo.ts";
+import { Pokemon, defaultPokemon } from "./types/types.ts";
+import getPokemonInfo from "./utils/getPokemonInfo.ts";
 import PokemonNextAndPrev from "./PokemonNextAndPrev.tsx";
 
 export default function PokemonInfo({ name, updateSearch }: { name: string, updateSearch: (name: string) => void }) {

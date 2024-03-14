@@ -31,7 +31,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
   function searchRandom() {
     (randomSearchRef.current as HTMLInputElement | null)!.disabled = true; 
     setTimeout(() => (randomSearchRef.current as HTMLInputElement | null)!.disabled = false, 1000); 
-    const randomPokemon = names[Math.floor(Math.random() * 1024)].name.toLowerCase();
+    const randomPokemon = names[Math.floor(Math.random() * 1023)].name.toLowerCase();
     updateSearch(randomPokemon);
     setResults([""]);
   }

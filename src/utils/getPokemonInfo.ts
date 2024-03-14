@@ -1,7 +1,7 @@
 import prettifyName from "./prettifyName";
-import { Pokemon, RawAbility, RawFlavorText, RawStat, RawVariety } from "./types";
+import { Pokemon, RawAbility, RawFlavorText, RawStat, RawVariety } from "../types/types.ts";
 
-import pokemonIdsObject from "./assets/pokemonNameId.json";
+import pokemonIdsObject from "../assets/pokemonNameId.json";
 const pokemonIds = pokemonIdsObject.pokemon;
 
 const speciesUrl = "https://pokeapi.co/api/v2/pokemon-species/";

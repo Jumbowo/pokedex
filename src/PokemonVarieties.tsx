@@ -1,4 +1,4 @@
-import prettifyName from "./prettifyName";
+import prettifyName from "./utils/prettifyName.ts";
 
 export default function PokemonVarieties({ varieties, selectedVar, submit, baseTabIndex }: {
   varieties: string[],

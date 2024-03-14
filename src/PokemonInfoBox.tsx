@@ -5,7 +5,7 @@ import PokemonStats from "./PokemonStats.tsx";
 import PokemonTypes from "./PokemonTypes";
 import PokemonVarieties from "./PokemonVarieties.tsx";
 
-import { Pokemon } from "./types.ts";
+import { Pokemon } from "./types/types.ts";
 
 export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar }: {
   pokemon: Pokemon,

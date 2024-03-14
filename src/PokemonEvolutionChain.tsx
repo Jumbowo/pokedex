@@ -1,6 +1,6 @@
 import EvoCard from "./EvoCard";
-import prettifyName from "./prettifyName";
-import { Pokemon } from "./types";
+import prettifyName from "./utils/prettifyName";
+import { Pokemon } from "./types/types.ts";
 import bigArrowIcon from "./assets/bigArrowIcon.svg";
 
 export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon }) {

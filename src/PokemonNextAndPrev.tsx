@@ -1,5 +1,5 @@
 import arrowIcon from "./assets/arrowIcon.svg";
-import { Pokemon } from "./types";
+import { Pokemon } from "./types/types.ts";
 
 export default function PokemonNextAndPrev({ pokemon, updateSearch }: {
   pokemon: Pokemon,

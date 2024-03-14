@@ -1,5 +1,5 @@
-import prettifyName from "./prettifyName";
-import { Pokemon } from "./types";
+import prettifyName from "./utils/prettifyName";
+import { Pokemon } from "./types/types.ts";
 
 export default function PokemonDetails({ pokemon }: { pokemon: Pokemon}) {
   return (
