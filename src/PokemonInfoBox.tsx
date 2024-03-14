@@ -35,12 +35,21 @@ export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar }: 
           <div className="flex flex-row justify-between pt-2 gap-4">
             <div className="flex flex-col gap-4">
               <div className="pt-4">{pokemon.flavor}</div>
+              <img
+                className="min-w-[80%] w-[80%] self-center block sm:hidden"
+                src={pokemon.sprite}
+                alt={pokemon.name}
+                title={pokemon.name}
+              />
               <PokemonDetails pokemon={pokemon} />
               <PokemonStats pokemon={pokemon} />
             </div>
-            <div className="min-w-[40%] w-[40%]">
-              <img src={pokemon.sprite} alt={pokemon.name} title={pokemon.name} />
-            </div>
+            <img
+              className="min-w-[40%] w-[40%] self-center sm:block hidden"
+              src={pokemon.sprite}
+              alt={pokemon.name}
+              title={pokemon.name}
+            />
           </div>
         </section>
         <PokemonEvolutionChain pokemon={pokemon} />
