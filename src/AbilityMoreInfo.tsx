@@ -34,7 +34,9 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
       const flavorEntry = data.flavor_text_entries.find((entry: RawAbilityFlavor) => entry.language.name === "en");
 
       const info = {
-        effect: effectEntry !== undefined ? effectEntry.effect : flavorEntry.flavor_text,
+        effect: effectEntry !== undefined 
+          ? effectEntry.effect.length > 500 ? flavorEntry.flavor_text : effectEntry.effect
+          : flavorEntry.flavor_text,
       };
 
       setAbilityInfo(info);
