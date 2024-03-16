@@ -35,7 +35,7 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
 
       const info = {
         effect: effectEntry !== undefined 
-          ? effectEntry.effect.length > 500 ? flavorEntry.flavor_text : effectEntry.effect
+          ? effectEntry.effect.length > 600 ? flavorEntry.flavor_text : effectEntry.effect
           : flavorEntry.flavor_text,
       };
 
@@ -52,8 +52,8 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
       {questionMarkIconMemo}
       <article
         className={`
-          absolute top-6 right-0 z-30 p-2 min-w-80
-          bg-slate-900 border border-slate-600
+          absolute top-6 -right-14 z-30 p-2 min-w-80
+          bg-slate-800 border border-slate-600
           animate-[fadeIn_0.2s_ease-in-out_1] 
           ${visible ? "" : "hidden"}
         `}

@@ -16,8 +16,15 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
   }, [name, selectedVar]);
 
   const infoBoxMemo = useMemo(() => {
-    return <PokemonInfoBox pokemon={pokemon} selectVariety={selectVariety} selectedVar={selectedVar} />
-  }, [pokemon, selectVariety, selectedVar]);
+    return (
+      <PokemonInfoBox
+        pokemon={pokemon}
+        selectVariety={selectVariety}
+        selectedVar={selectedVar}
+        updateSearch={updateSearch}
+      />
+    );
+  }, [pokemon, selectVariety, selectedVar, updateSearch]);
 
   const nextPrevMemo = useMemo(() => {
     return <PokemonNextAndPrev pokemon={pokemon} updateSearch={updateSearch} />

@@ -3,7 +3,10 @@ import prettifyName from "./utils/prettifyName";
 import { Pokemon } from "./types/types.ts";
 import bigArrowIcon from "./assets/bigArrowIcon.svg";
 
-export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon }) {
+export default function PokemonEvolutionChain({ pokemon, updateSearch }: {
+  pokemon: Pokemon,
+  updateSearch: (name: string) => void,
+}) {
   function getRenderNodes() {
     return pokemon.evolutionChain!.evolvesTo.map((entry) => {
       if (entry.evolvesTo.length !== 0) {
@@ -14,11 +17,11 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
                 className="flex flex-row justify-evenly gap-10" 
                 key={pokemon.evolutionChain!.name + entry.name + entry2.name}
               >
-                <EvoCard name={pokemon.evolutionChain!.name} />
-                <img className="invert-[90%] w-10" src={bigArrowIcon} />
-                <EvoCard name={entry.name} />
-                <img className="invert-[90%] w-10" src={bigArrowIcon} />
-                <EvoCard name={entry2.name} />
+                <EvoCard name={pokemon.evolutionChain!.name} updateSearch={updateSearch} />
+                <img className="invert-[90%] w-10" src={bigArrowIcon} alt="Right pointing arrow" />
+                <EvoCard name={entry.name} updateSearch={updateSearch} />
+                <img className="invert-[90%] w-10" src={bigArrowIcon} alt="Right pointing arrow" />
+                <EvoCard name={entry2.name} updateSearch={updateSearch} />
               </div>
             );
           })
@@ -29,9 +32,9 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
             className="flex flex-row justify-evenly gap-10"
             key={pokemon.evolutionChain!.name + entry.name}
           >
-            <EvoCard name={pokemon.evolutionChain!.name} />
-            <img className="invert-[90%] w-10" src={bigArrowIcon} />
-            <EvoCard name={entry.name} />
+            <EvoCard name={pokemon.evolutionChain!.name} updateSearch={updateSearch} />
+            <img className="invert-[90%] w-10" src={bigArrowIcon} alt="Right pointing arrow" />
+            <EvoCard name={entry.name} updateSearch={updateSearch} />
           </div>
         );
       }
@@ -43,7 +46,7 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
       <section
         className="
           p-4 text-center max-w-3xl flex flex-col gap-4
-          border border-t-0 border-slate-600 bg-slate-900
+          border-4 border-t-0 border-slate-600 bg-slate-900
         "
       >
         <span>{prettifyName(pokemon.name)} has no evolution chain.</span>
@@ -54,7 +57,7 @@ export default function PokemonEvolutionChain({ pokemon }: { pokemon: Pokemon })
     <section
       className="
         p-4 text-left max-w-3xl flex flex-col gap-4
-        border border-t-0 border-slate-600 bg-slate-900
+        border-4 border-t-0 border-slate-600 bg-slate-900
       "
     >
       <h2>Evolution Path</h2>

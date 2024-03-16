@@ -4,7 +4,7 @@ import AbilityMoreInfo from "./AbilityMoreInfo.tsx";
 
 export default function PokemonDetails({ pokemon }: { pokemon: Pokemon}) {
   return (
-    <section className="flex flex-row justify-normal border border-slate-600 bg-cyan-900 p-2">
+    <section className="flex flex-row justify-normal border border-slate-600 bg-blue-900 p-2">
       <div className="flex flex-col min-w-[50%] gap-2">
         <div className="flex flex-col">
           <span className="text-white font-semibold">Height</span>

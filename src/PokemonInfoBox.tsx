@@ -7,34 +7,36 @@ import PokemonVarieties from "./PokemonVarieties.tsx";
 
 import { Pokemon } from "./types/types.ts";
 
-export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar }: {
+export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar, updateSearch }: {
   pokemon: Pokemon,
   selectVariety: (variety: string) => void,
   selectedVar: string,
+  updateSearch: (name: string) => void,
 }) {
 
+  const evoChainMemo = useMemo(() => {
+    return <PokemonEvolutionChain pokemon={pokemon} updateSearch={updateSearch} />
+  }, [pokemon, updateSearch]);
+  
   const mainInfoCardMemo = useMemo(() => {
     return (
       <>
         <section
           className="
             p-4 text-left max-w-3xl flex flex-col
-            border border-slate-600 bg-slate-900
+            border-4 border-b border-slate-600 bg-slate-900
           "
         >
           <div className="flex flex-row justify-between text-2xl">
             <div className="flex flex-row">
-              {pokemon.name !== ""
-                ? <h1 className="pr-3">{pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}</h1>
-                : <h1 className="pr-3 w-32 rounded bg-slate-700 animate-pulse"></h1>
-              }
+              <h1 className="pr-3">{pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}</h1>
               <PokemonTypes types={pokemon.types} />
             </div>
             <h2>{"#" + pokemon.id}</h2>
           </div>
           <div className="flex flex-row justify-between pt-2 gap-4">
             <div className="flex flex-col gap-4">
-              <div className="pt-4">{pokemon.flavor}</div>
+              <span className="pt-4">{pokemon.flavor}</span>
               <img
                 className="min-w-[80%] w-[80%] self-center block sm:hidden"
                 src={pokemon.sprite}
@@ -52,7 +54,6 @@ export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar }: 
             />
           </div>
         </section>
-        <PokemonEvolutionChain pokemon={pokemon} />
       </>
     );
   }, [pokemon]);
@@ -72,6 +73,7 @@ export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar }: 
         baseTabIndex={4}
       />
       {mainInfoCardMemo}
+      {evoChainMemo}
     </section>
   );
 }
