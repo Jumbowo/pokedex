@@ -34,10 +34,12 @@ export default async function getPokemonInfo(name: string, variety: string = "")
     prevName: (speciesData.id - 1) > 0 ? pokemonIds[speciesData.id - 2].name : "",
     nextName: speciesData.id < NUM_OF_POKEMON - 1 ? pokemonIds[speciesData.id].name : "",
     sprite: pokemonData.sprites.other["official-artwork"].front_default,
-    flavor: speciesData.flavor_text_entries
-      .toReversed()
-      .find((entry: RawFlavorText) => entry.language.name === "en")
-      .flavor_text,
+    flavor: (() => {
+      const temp = speciesData.flavor_text_entries
+        .toReversed()
+        .find((entry: RawFlavorText) => entry.language.name === "en");
+      return temp ? temp.flavor_text : "No information found."
+    })(),
     types: pokemonData.types
       .map((entry: { slot: number, type: { name: string, url: string } }) => entry.type.name),
     varieties: speciesData.varieties

@@ -10,11 +10,10 @@ export default function EvoCard({ name, updateSearch }: {
   const [pokemon, setPokemon] = useState(defaultPokemon);
   
   useEffect(() => {
-    async function getPokemon() {
+    (async function getPokemon() {
       const newPokemon = await getPokemonInfo(name);
       setPokemon(newPokemon);
-    }
-    getPokemon();
+    })();
   }, [name])
   
   return (

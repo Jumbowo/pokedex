@@ -60,7 +60,7 @@ export default function PokemonEvolutionChain({ pokemon, updateSearch }: {
         border-4 border-t-0 border-slate-600 bg-slate-900
       "
     >
-      <h2>Evolution Path</h2>
+      <h2>Evolution Paths</h2>
       {getRenderNodes().map((entry) => entry)}
     </section>
   );

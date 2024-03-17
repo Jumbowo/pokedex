@@ -26,7 +26,7 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
   }, []);
 
   useEffect(() => {
-    async function getAbilityInfo() {
+    (async function getAbilityInfo() {
       const res = await fetch(abilityUrl + abilityName.toLowerCase());
       const data = await res.json();
 
@@ -40,8 +40,7 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
       };
 
       setAbilityInfo(info);
-    }
-    getAbilityInfo();
+    })();
   }, [abilityName]);
 
   return (
