@@ -8,6 +8,8 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
   const [pokemon, setPokemon] = useState<Pokemon>(defaultPokemon);
   const [selectedVar, setSelectedVar] = useState("");
 
+  console.log("Render: Pokemon - " + pokemon.name + ", SelectedVar: " + selectedVar);
+
   const selectVariety = useCallback(async (varietyName: string) => {
     if (varietyName === selectedVar) return;
     const newPokemon = await getPokemonInfo(name, varietyName);
@@ -41,7 +43,7 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
 
   if (pokemon.name === "") return <></>;
   return (
-    <div className="flex flex-col gap-8 pt-0">
+    <div className="flex flex-col gap-8 pt-0 min-h-[90vh]">
       {nextPrevMemo}
       {infoBoxMemo}
     </div>

@@ -14,7 +14,7 @@ export default function PokemonVarieties({ varieties, selectedVar, submit, baseT
           return ( 
             <button
               className={`
-                p-2 hover:bg-slate-700 
+                p-2 hover:bg-slate-700 max-w-[18%]
                 border rounded-t-lg border-b-0 border-slate-600
                 focus:outline-0 focus:border-slate-400
                 ${name === selectedVar ? "bg-slate-800" : "bg-slate-900"}
