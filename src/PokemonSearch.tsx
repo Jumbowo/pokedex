@@ -47,7 +47,11 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
         <label className="font-bold text-2xl relative" htmlFor="searchForm">
           Search Pokemon:
           <input
-            className="absolute top-11 -right-14 z-20 w-8 invert-[50%] hover:invert-[90%]"
+            className="
+              absolute top-11 -right-14 z-20 w-8
+              invert-[20%] hover:invert-[40%]
+              dark:invert-[50%] dark:hover:invert-[90%]
+            "
             id="searchSubmit"
             type="image"
             src={arrowIcon}
@@ -56,8 +60,9 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
           />
           <input
             className="
-            absolute top-[39px] -right-28 z-20 w-10 outline-0 invert-[50%]
-            focus:invert-[90%] hover:invert-[90%]
+              absolute top-[39px] -right-28 z-20 w-10 outline-0 
+              invert-[20%] focus:invert-[40%] hover:invert-[40%]
+              dark:invert-[50%] dark:focus:invert-[90%] dark:hover:invert-[90%]
             "
             id="searchSubmit"
             ref={randomSearchRef}
@@ -69,8 +74,9 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
         </label>
         <input
           className="
-          border border-slate-600 bg-slate-900 max-w-96 w-80 p-2
-          focus:outline-0 focus:border-slate-400 z-10
+            border max-w-96 w-80 p-2 z-10
+            border-slate-900 bg-slate-400 focus:border-slate-700
+            dark:border-slate-600 dark:bg-slate-900 focus:outline-0 dark:focus:border-slate-400
           "
           id="searchForm"
           ref={searchFormRef}

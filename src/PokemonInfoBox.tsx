@@ -22,16 +22,20 @@ export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar, up
     return (
       <section
         className="
-        p-4 text-left max-w-3xl flex flex-col
-        border-4 border-b border-slate-600 bg-slate-900
+          p-4 text-left max-w-3xl flex flex-col
+          border-4 border-b 
+          border-slate-900 bg-slate-400
+          dark:border-slate-600 dark:bg-slate-900
         "
       >
         <div className="flex flex-row justify-between text-2xl">
           <div className="flex flex-row">
-            <h1 className="pr-3">{pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}</h1>
+            <h1 className="text-black dark:text-white pr-3">
+              {pokemon.varieties.length === 1 ? pokemon.speciesName : pokemon.name}
+            </h1>
             <PokemonTypes types={pokemon.types} />
           </div>
-          <h2>{"#" + pokemon.id}</h2>
+          <h2 className="text-black dark:text-white">{"#" + pokemon.id}</h2>
         </div>
         <div className="flex flex-row justify-between pt-2 gap-4">
           <div className="flex flex-col gap-4 min-w-[50%]">
@@ -59,8 +63,8 @@ export default function PokemonInfoBox({ pokemon, selectVariety, selectedVar, up
   return (
     <section
       className="
-      flex flex-col relative
-      animate-[fadeSlideIn_0.4s_ease-in-out_1]
+        flex flex-col relative
+        animate-[fadeSlideIn_0.4s_ease-in-out_1]
       "
       key={pokemon.name}
     >

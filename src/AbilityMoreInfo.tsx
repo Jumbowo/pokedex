@@ -15,7 +15,7 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
   const questionMarkIconMemo = useMemo(() => {
     return (
       <input
-        className="w-3 invert-[90%] translate-y-px"
+        className="w-3 invert-[10%] dark:invert-[90%] translate-y-px"
         type="image"
         src={moreInfoQuestionMark}
         alt="More info question mark"
@@ -52,7 +52,8 @@ export default function AbilityMoreInfo({ abilityName }: { abilityName: string }
       <article
         className={`
           absolute top-6 -right-14 z-30 p-2 min-w-80
-          bg-slate-800 border border-slate-600
+          bg-slate-400 border-slate-900
+          dark:bg-slate-800 border dark:border-slate-600
           animate-[fadeIn_0.2s_ease-in-out_1] 
           ${visible ? "" : "hidden"}
         `}

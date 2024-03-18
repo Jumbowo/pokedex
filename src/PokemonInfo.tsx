@@ -8,8 +8,6 @@ export default function PokemonInfo({ name, updateSearch }: { name: string, upda
   const [pokemon, setPokemon] = useState<Pokemon>(defaultPokemon);
   const [selectedVar, setSelectedVar] = useState("");
 
-  console.log("Render: Pokemon - " + pokemon.name + ", SelectedVar: " + selectedVar);
-
   const selectVariety = useCallback(async (varietyName: string) => {
     if (varietyName === selectedVar) return;
     const newPokemon = await getPokemonInfo(name, varietyName);

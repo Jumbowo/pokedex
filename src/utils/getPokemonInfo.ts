@@ -36,8 +36,8 @@ export default async function getPokemonInfo(name: string, variety: string = "")
     sprite: pokemonData.sprites.other["official-artwork"].front_default,
     flavor: (() => {
       const temp = speciesData.flavor_text_entries
-        .toReversed()
-        .find((entry: RawFlavorText) => entry.language.name === "en");
+        .filter((entry: RawFlavorText) => entry.language.name === "en")
+        .sort(() => 0.5 - Math.random())[0];
       return temp ? temp.flavor_text : "No information found."
     })(),
     types: pokemonData.types
