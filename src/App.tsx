@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Footer from "./Footer";
 import MainContent from "./MainContent";
 import darkModeIcon from "./assets/darkMode.svg";
@@ -7,6 +7,15 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
+
+  const children = useMemo(() => {
+    return (
+      <>
+        <MainContent />
+        <Footer />
+      </>
+    );
+  }, []);
 
   return (
     <div
@@ -21,7 +30,7 @@ export default function App() {
       <input
         className="
           fixed top-3 right-3 w-8
-          invert-[10%] hover:invert-[40%]
+          invert-[20%] hover:invert-0
           dark:invert-[50%] dark:hover:invert-[90%]
         "
         type="image"
@@ -29,8 +38,7 @@ export default function App() {
         alt="Dark mode toggle"
         onClick={() => setDarkMode(!darkMode)}
       />
-      <MainContent />
-      <Footer />
+      {children}
     </div>
   )
 }

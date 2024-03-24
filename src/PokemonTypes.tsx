@@ -14,7 +14,7 @@ export default function PokemonTypes({ types }: { types: string[] }) {
       {typeInfoList.map((type) => {
         return (
           <img
-            className="p-1 w-7 h-7 translate-y-[3px] z-0 border rounded-full"
+            className="p-1 w-7 h-7 translate-y-[3px] z-0 border border-slate-900 dark:border-white rounded-full"
             style={{ backgroundColor: `${type.color}` }}
             key={type.name}
             src={type.icon}

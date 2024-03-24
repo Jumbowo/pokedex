@@ -11,7 +11,7 @@ const fuseOptions = { useExtendedSearch: true, keys: ["name"] };
 const fuse = new Fuse(names, fuseOptions);
 
 const searchBoxTabIndex = 1;
-  
+
 export default function PokemonSearch({ updateSearch }: { updateSearch: (name: string) => void }) {
   const [results, setResults] = useState([""]);
   const [dropdownVisible, setDropdownVisible] = useState(true);
@@ -34,8 +34,8 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
   }, [results, updateSearch]);
 
   const searchRandom = useCallback(() => {
-    (randomSearchRef.current as HTMLInputElement | null)!.disabled = true; 
-    setTimeout(() => (randomSearchRef.current as HTMLInputElement | null)!.disabled = false, 1000); 
+    (randomSearchRef.current as HTMLInputElement | null)!.disabled = true;
+    setTimeout(() => (randomSearchRef.current as HTMLInputElement | null)!.disabled = false, 1000);
     const randomPokemon = names[Math.floor(Math.random() * 1023)].name.toLowerCase();
     updateSearch(randomPokemon);
     setResults([""]);
@@ -49,7 +49,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
           <input
             className="
               absolute top-11 -right-14 z-20 w-8
-              invert-[20%] hover:invert-[40%]
+              invert-[20%] hover:invert-0
               dark:invert-[50%] dark:hover:invert-[90%]
             "
             id="searchSubmit"
@@ -61,7 +61,7 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
           <input
             className="
               absolute top-[39px] -right-28 z-20 w-10 outline-0 
-              invert-[20%] focus:invert-[40%] hover:invert-[40%]
+              invert-[20%] focus:invert-0 hover:invert-0
               dark:invert-[50%] dark:focus:invert-[90%] dark:hover:invert-[90%]
             "
             id="searchSubmit"
@@ -97,12 +97,12 @@ export default function PokemonSearch({ updateSearch }: { updateSearch: (name: s
     <section className="flex flex-col gap-2 items-center relative">
       {childrenMemo}
       {dropdownVisible
-        ? <PokemonSearchDropdown 
-            results={results} 
-            submit={submitSearch} 
-            searchBoxTabIndex={searchBoxTabIndex} 
-            searchRef={pokemonSearchDropdownRef}
-          />
+        ? <PokemonSearchDropdown
+          results={results}
+          submit={submitSearch}
+          searchBoxTabIndex={searchBoxTabIndex}
+          searchRef={pokemonSearchDropdownRef}
+        />
         : <></>
       }
     </section>

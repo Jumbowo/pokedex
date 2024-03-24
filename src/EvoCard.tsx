@@ -15,7 +15,7 @@ export default function EvoCard({ name, updateSearch }: {
       setPokemon(newPokemon);
     })();
   }, [name])
-  
+
   return (
     <article
       className="flex flex-col justify-center text-center max-w-[15%] hover:text-white"
